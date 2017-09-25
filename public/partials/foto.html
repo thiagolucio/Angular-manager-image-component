@@ -1,0 +1,54 @@
+<h1 class="text-center height80 padding30">{{foto.titulo}}</h1>
+<!-- mensagem de alerta -->
+<div class="card card-outline-warning text-xs-center" ng-show="mensagem.length">
+    <div class="card-block">
+        <blockquote class="card-blockquote">
+            {{mensagem}}
+        </blockquote>
+    </div>
+</div>
+<!-- final alerta -->
+<hr>
+<div class="row padding30">
+    <div class="col-md-6">
+        <form name="formulario" ng-submit="submeter()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" name="titulo" ng-model="foto.titulo" required ng-maxlength="20">
+                    <!-- <span class="label label-danger" ng-show="formulario.$submitted && formulario.titulo.$error.maxlength">Não pode ser maior que 20 caracteres.</span> -->
+                    <span class="label label-danger" ng-show="formulario.$submitted && formulario.titulo.$error.required || formulario.titulo.$error.maxlength">Título Obrigatório e menor que 20 caracteres.</span>
+                    <small class="form-text text-muted">Digite o título desejado para sua imagem.</small>
+                </div>
+                <!-- <div class="form-group">
+                        <label for="Subtitulo">Subtítulo</label>
+                        <input type="text" class="form-control" name="subtitulo" ng-model="foto.subtitulo" required ng-maxlength="20">
+                        <span class="label label-danger" ng-show="formulario.$submitted && formulario.subtitulo.$error.required">Subtítulo é Obrigatório.</span>
+                        <small class="form-text text-muted">Digite o Subtítulo desejado para sua imagem.</small>
+                    </div> -->
+                <div class="form-group">
+                    <label for="urlImage">URL</label>
+                    <input class="form-control" name="url" ng-model="foto.url" required>
+                    <span class="label label-danger" ng-show="formulario.$submitted && formulario.url.$error.required">URL Obrigatória.</span>
+                    <small class="form-text text-muted">Cole a URL da Imagem.</small>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoImagem">Descricao da Imagem</label>
+                    <textarea class="form-control" rows="5" name="descricao" ng-model="foto.descricao"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="selecaoGrupos">Grupo</label>
+                    <select class="form-control" name="grupo" required ng-controller="GruposController" ng-model="foto.grupo" ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos">
+                            <option value="">Selecione o Grupo</option>
+                    </select>
+                    <span class="label label-danger" ng-show="formulario.$submitted && formulario.grupo.$error.required">Grupo Obrigatória.</span>
+                </div>
+                <button type="submit" class="btn btn-success" ng-disabled="formulario.$invalid">Salvar</button>
+                <a type="reset" href="fotos" class="btn btn-warning" meu-focus >Voltar</a>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
+    </div>
+</div>

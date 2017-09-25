@@ -1,0 +1,45 @@
+<div class="jumbotron transparent">
+    <h2 class="text-center">Componente AngularJS Gestor de Imagens</h2>
+</div>
+<div class="card card-outline-warning text-xs-center" ng-show="mensagem.length">
+    <div class="card-block">
+        <blockquote class="card-blockquote">
+            {{mensagem}}
+        </blockquote>
+    </div>
+</div>
+<!-- final alerta -->
+<!-- NAVBAR DE PESQUISA -->
+<nav class="navbar navbar-toggleable-md navbar-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarFiltrar" aria-controls="navbarFiltrar"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Filtragem </a>
+    <div class="collapse navbar-collapse" id="navbarFiltrar">
+        <form class="form-inline">
+            <input ng-model="filtro" ng-model-options="{ allowInvalid: true, debounce: 110 }" class="form-control mr-sm-2" type="text"
+            placeholder="Filtrar">
+            <a class="btn btn-outline-warning my-2 my-sm-0" href="fotos/new">Carregar Imagem</a>
+        </form>
+    </div>
+</nav>
+<div class="row padding30">
+    <div class="col-md-4 animacao" ng-repeat="foto in fotos | filter: filtro">
+        <meu-painel titulo="{{foto.titulo}}" subtitulo="{{foto.subtitulo}}" descricao="{{foto.descricao}}">
+        <!-- Virou Diretiva da linha de baixo <img src="{{foto.url}}" class="img-fluid" alt="{{foto.titulo}}"> -->
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}" alt="{{foto.titulo}}"></minha-foto>
+        <div class="card-block padding">
+            <h5>{{foto.subtitulo}}</h5>
+            <p>{{foto.descricao}}</p>
+            <p>{{grupo.nome}}</p>
+        </div>
+        <div class="card-footer text-muted text-xs-center">
+            <a href="/fotos/edit/{{foto._id}}" class="btn btn-outline-warning card-link">Editar</a>
+            <meu-botao-perigo nome="Remover" acao="remover(foto)"></meu-botao-perigo>
+        </div>
+        </meu-painel>
+    </div>
+    <meus-titulos></meus-titulos>
+</div>
+</div>
